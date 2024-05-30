@@ -1,0 +1,86 @@
+Frequency of Likes in User:
+
+import matplotlib.pyplot as plt; plt.rcdefaults()
+import numpy as np
+import matplotlib.pyplot as plt
+import csv
+names = []
+frequency = []
+with open("/content/twitter_data.csv") as csvfile:
+reader = csv.DictReader(csvfile)
+for row in reader:
+names.append(row["Username"])
+frequency.append(int(row["Likes"]))
+y_pos = np.arange(len(names))
+plt.bar(y_pos, frequency, align='center', alpha=0.5)
+plt.xticks(y_pos, names, rotation='vertical')
+plt.ylabel('Username')
+plt.title('Likes')
+plt.show()
+
+Frequency of Retweets in Tweet ID:
+
+import matplotlib.pyplot as plt; plt.rcdefaults()
+import numpy as np
+import matplotlib.pyplot as plt
+import csv
+names = []
+frequency = []
+with open("/content/twitter_data.csv") as csvfile:
+reader = csv.DictReader (csvfile)
+for row in reader:
+names.append(row["Tweet_ID"])
+frequency.append(int(row["Retweets"]))
+y_pos = np.arange(len(names))
+plt.bar(y_pos, frequency, align='center', alpha=0.5)
+plt.xticks (y_pos, names, rotation='vertical')
+plt.ylabel('Retweets')
+plt.show()
+
+Frequency Of Words in tweets:
+
+import csv
+Username - []
+Text = []
+with open("/content/twitter data.csv") as csvfile:
+reader csv.DictReader(csvfile)
+for row in reader:
+Username.append(row["Username"])
+Text.append(row["Text"])
+#Convert the Text list to a string Text = ".join(Text)
+#Count the number of occurrences of each word in the Text string
+word counts()
+for word in Text.split():
+if word not in word_counts:
+word_counts [word] = 0
+word_counts [word] += 1
+#Create a list of the words and their frequencies
+words list(word_counts.keys())
+frequencies list(word_counts.values())
+#Plot the words and their frequencies
+plt.bar(words, frequencies)
+plt.xlabel("Word")
+plt.ylabel("Frequency")
+plt.title("Frequency of Words in Tweets")
+plt.show()
+
+Occurrence Count of Retweet over Tweet_ID:
+
+import numpy as np
+import matplotlib.pyplot as plt
+import csv
+Tweet_ID = []
+occurrence_count = []
+with open("/content/twitter_data.csv") as csvfile:
+reader = csv.DictReader(csvfile)
+for row in reader:
+Tweet_ID.append(row["Tweet_ID"])
+occurrence_count.append(int(row["Retweets"]))
+plt.plot(Tweet_ID, occurrence_count, marker='o', linestyle='-')
+# Adding labels and title
+plt.xlabel('Tweet_ID')
+plt.ylabel('Retweets')
+plt.title('Occurrence Count Retweet over Tweet_ID')
+# Display the plot
+plt.show()
+
