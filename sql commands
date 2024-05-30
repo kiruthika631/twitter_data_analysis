@@ -1,0 +1,47 @@
+Step 1: Creating Tables in Mysql for Data. Cmd: mysql -u root -p
+Password: cloudera    
+ 
+Now we are creating a Database for this project in MySQL Command: create database Twitter_db.
+
+Now we are creating a MySQL table:
+use Twitter_db;
+Command: CREATE TABLE TWITTER_TABLE (Tweet_ID INT, Username VARCHAR(100),Retweets INT, Likes INT);
+
+Now we are importing the twitter data from CSV file to MySQL table: 
+LOAD DATA LOCAL INFILE "/home/cloudera/Desktop/twitter/twitter_dataset.csv" INTO TABLE Twitter_db.TWITTER_TABLE_HIVE COLUMNS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\n'; 
+We have specified the location of the csv file and the database.table name.
+Data is loaded successfully.
+
+VIEWING THE TABLE DESCRIPTION
+DESC TWITTER_tABLE; 
+ 
+CREATING DATABASE IN HIVE:
+Create database TWITTER_DB_HIVE DATABASE.
+
+CREATING TABLE IN TWITTER_DB_HIVE DATABASE:
+CREATE EXTERNAL TABLE TWITTER_TABLE_HIVE(Tweet_ID INT, Username STRING, Text STRING, Retweets INT,Likes INT):
+ 
+ 
+IMPORTING FROM MYSQL TABLE TO HIVE USING SQOOP:
+sqoop import --connect jdbc:mysql://localhost/CRIME_Database --username=root --password=cloudera -- table=TWITTER_TABLE -m 1 --hive-home=/user/hive/warehouse --hive-import --hive-overwrite --hive- table=Twitter_db_hive.TWITTER_TABLE_HIVE
+ 
+Executing queries in HIVE:
+1.to fetch usernames with retweets more than 25:
+select username from twitter_table_hive where retweets > 25;
+
+2.To select tweets with likes greater than 50:
+select * from twitter_table_hive where likes > 50
+ 
+3.selecting retweets sorted in descending order:
+select * from twitter_table_hive sort by retweets desc limit 20;
+
+4.selecting tweets with likes>50 and retweets <75:
+select * from twitter_table_hive where likes > 50 and retweets < 75;
+ 
+5.Selecting username whose tweet_id is 156:
+select username from twitter_table_hive where tweet_id = 156;
+ 
+6.Selecting maximum number of likes.
+select max(like) from twitter_table_hive;
+ 
+
